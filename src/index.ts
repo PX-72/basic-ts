@@ -8,7 +8,7 @@ const app = append(
 );
 
 const init = async (simulatedDelay = 1_000) => {
-    const { context } = await getContext(simulatedDelay);
+    const context = await getContext(simulatedDelay);
     app.querySelector('p').remove();
     append(app, createContext(context));
 };

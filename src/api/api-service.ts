@@ -1,3 +1,5 @@
+import { Context } from "../data/models.js";
+
 const DATA = {
     context: {
         id: 123,
@@ -10,7 +12,7 @@ const DATA = {
                 {
                     positionId: 1,
                     insightId: '1483783',
-                    quantity: 100       
+                    quantity: 200       
                 },
                 {
                     positionId: 2,
@@ -29,12 +31,12 @@ const DATA = {
                 }
             ]
         }
-    }
+    } as Context
 };
 
-const delay = time => new Promise(resolve => setTimeout(resolve, time));
+const delay = (time: number) => new Promise<void>(resolve => setTimeout(resolve, time));
 
-export const getContext = async networkDelay => {
+export const getContext = async (networkDelay: number): Promise<Context> => {
     await delay(networkDelay);
-    return structuredClone(DATA);
+    return structuredClone(DATA.context) as Context;
 };
