@@ -3,13 +3,13 @@ import { getContext } from './api/api-service.js';
 import { build, append } from './utils/dom-helper.js';
 
 const app = append( 
-    document.querySelector('#app'), 
+    document.querySelector<HTMLElement>('#app')!, 
     build('p', { text: 'Loading...' })
 );
 
 const init = async (simulatedDelay = 1_000) => {
     const context = await getContext(simulatedDelay);
-    app.querySelector('p').remove();
+    app.querySelector<HTMLElement>('p')?.remove();
     append(app, createContext(context));
 };
 

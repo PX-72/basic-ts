@@ -1,9 +1,10 @@
+import { Position } from './data/models.js';
 import { build, append, toggleVisibility } from './utils/dom-helper.js';
 
 const CONTAINER_STYLE = {
     margin: '0.8rem',
-    borderTop: '1px solid #336',
-    paddingTop: '0.4rem'
+    'border-top': '1px solid #336',
+    'padding-top': '0.4rem'
 };
 
 const SUM_CONTAINER_STYLE = {
@@ -11,26 +12,26 @@ const SUM_CONTAINER_STYLE = {
 };
 
 const BUTTON_STYLE = {
-    marginLeft: '0.5rem',
+    'margin-left': '0.5rem',
     cursor: 'pointer',
     dispay: 'inline-block'
 };
 
 const INPUT_STYLE = {
-    marginLeft: '0.5rem',
+    'margin-left': '0.5rem',
     width: '3rem',
     dispay: 'inline-block'
 };
 
 const TEXT_BLOCK_STYLE = {
-    marginLeft: '0.5rem'
+    'margin-left': '0.5rem'
 };
 
-export const createPosition = (positionData, posQtyChanged) => {
-    const { positionId, insightId, quantity } = positionData;
+export const createPosition = (positionData: Position, posQtyChanged: (posId: number, newQty: number) => void): HTMLElement => {
+    const { positionId, insightId, quantity = 0 } = positionData;
 
     const qtyText = build('span', { 
-        text: quantity, 
+        text: quantity.toString(), 
         style: TEXT_BLOCK_STYLE 
     });
 
@@ -47,7 +48,7 @@ export const createPosition = (positionData, posQtyChanged) => {
 
             qtyText.innerText = qtyInput.value || '0';
         } 
-    });
+    }) as HTMLInputElement;
 
     const editButton = build('button', {
         text: 'edit', 

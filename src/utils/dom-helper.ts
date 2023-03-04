@@ -1,4 +1,13 @@
-export const build = (type, options = {}) => {
+export type HtmlElementBuilderOptions = {
+    text?: string,
+    style?: object, 
+    visible?: boolean,
+    attributes?: object,
+    eventType?: string,
+    eventCallback?: (e: HTMLElement) => void
+};
+
+export const build = (type: string, options: HtmlElementBuilderOptions = {}): HTMLElement => {
     const {
         text,
         style = {}, 
@@ -12,7 +21,7 @@ export const build = (type, options = {}) => {
     if (text) element.innerText = text;
 
     for (const [key, value] of Object.entries(style)) {
-        element.style[key] = value;
+        element.style.setProperty(key, value);
     }
 
     if (!visible) element.style.display = 'none';
@@ -28,12 +37,12 @@ export const build = (type, options = {}) => {
     return element;
 };
 
-export const append = (parent, ...children) => {
+export const append = (parent: HTMLElement, ...children: HTMLElement[]): HTMLElement => {
     for (const childElement of children) parent.appendChild(childElement);
     return parent;
 };
 
-export const toggleVisibility = (elements = [], visibleStyle = 'block') => {
+export const toggleVisibility = (elements: HTMLElement[] = [], visibleStyle = 'block'): void => {
     elements.forEach(element => {
         element.style.display = element.style.display === 'none' ? visibleStyle : 'none';
     });
